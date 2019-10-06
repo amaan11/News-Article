@@ -20,3 +20,6 @@ css Libarry -antd
 utility Library - lodash
 
 ## The backend for this project is developed in express 
+
+clone the project  - https://github.com/amaan11/Auth-backend
+follow the steps mentioned in README file of that repository
