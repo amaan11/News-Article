@@ -2,10 +2,10 @@ import React from "react";
 import { Button, Icon, DatePicker, AutoComplete } from "antd";
 import { get, map } from "lodash";
 import { connect } from "react-redux";
+import moment from "moment";
 import FormField from "../../components/FormField";
 import { fetchNewsArticleRequest } from "../../redux/action/dashboard";
 import ArticleList from "../Article";
-import moment from "moment";
 
 const styles = {
   container: {
@@ -152,7 +152,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { filterDiv, isFiltered, filteredArticle, dataSource } = this.state;
-    let { articles } = this.props;
+    let { articles, user } = this.props;
     const { sites, authors } = this.getFilterOptions();
 
     if (isFiltered) {
@@ -223,8 +223,10 @@ class Dashboard extends React.Component {
 }
 const mapStateToProps = state => {
   const { articles } = state.dashboard;
+  const { user } = state.auth;
   return {
-    articles: articles
+    articles: articles,
+    user: user
   };
 };
 

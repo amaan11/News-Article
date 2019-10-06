@@ -1,12 +1,17 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED } from "../action/types";
+import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNUP_SUCCESS } from "../action/types";
 
-const intialState = {};
+const intialState = {
+  user: [],
+  errorMessage: ""
+};
 export default function authReducer(state = intialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      console.log("action>>>");
+      return { ...state, user: action.response.data };
     case LOGIN_FAILED:
-      console.log("action>>>");
+      return { ...state, errorMessage: action.response.data };
+    case SIGNUP_SUCCESS:
+      return { ...state, user: action.response.data };
     default:
       return state;
   }

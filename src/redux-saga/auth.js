@@ -1,11 +1,8 @@
 import { put, call, fork, takeLatest } from "redux-saga/effects";
-import { push } from "connected-react-router";
 import Auth from "../Services/Auth";
-import {
-  loginSuccess,
-  loginFailed,
-  postSignupRequest
-} from "../redux/action/auth";
+import swal from "sweetalert";
+import history from "../history";
+import { loginSuccess, loginFailed, signupSuccess } from "../redux/action/auth";
 import { LOGIN_REQUEST, SIGNUP_REQUEST } from "../redux/action/types";
 
 function loginRequestAPICall(payload) {
@@ -19,21 +16,24 @@ function* loginSaga(payload) {
   try {
     const response = yield call(loginRequestAPICall, payload.payload);
 
-    // yield put(loginSuccess(response.data.token, payload.payload));
-
-    console.log("resss>>>", response);
-    yield put(push("/dashboard"));
-  } catch (error) {
-    // yield put(loginFailed(error.data.message));
-  }
+    if (!response.isSuccess) {
+      swal(response.data, "Please Try Again !!", "error");
+      yield put(loginFailed(response));
+    } else {
+      yield put(loginSuccess(response));
+      history.push("/article");
+    }
+  } catch (error) {}
 }
 function* postSignupRequestSaga(payload) {
   try {
     const response = yield call(postSignupRequestApi, payload.payload);
 
-    // yield put(loginSuccess(response.data.token, payload.payload));
+    if (response.isSuccess) {
+      yield put(signupSuccess(response));
+    }
 
-    yield put(push("/dashboard"));
+    history.push("/article");
   } catch (error) {}
 }
 

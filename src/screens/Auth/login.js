@@ -35,7 +35,6 @@ class Login extends Component {
   }
 
   onForgetPasswordHandler = () => {
-    console.log("forget>>>");
     this.setState({ isForgetPassword: true });
   };
   onChangeHandler = e => {

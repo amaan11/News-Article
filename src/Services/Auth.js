@@ -1,15 +1,14 @@
 export default class Auth {
   static authenticate = async payload => {
-    console.log("authenticate>fgh>>", payload);
     const _url = "http://localhost:8000/login";
 
     let response = {};
-    await fetch(_url, {
-      headers: {
-        "Content-Type": "application/json"
-      },
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
-    })
+    };
+    await fetch(_url, requestOptions)
       .then(response => response.json())
       .then(res => (response = res));
     return response;
@@ -17,14 +16,17 @@ export default class Auth {
 
   static register = async payload => {
     const _url = "http://localhost:8000/register";
+    let response = {};
 
-    await fetch(_url, {
+    const requestOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
-    });
+    };
+    await fetch(_url, requestOptions)
+      .then(response => response.json())
+      .then(res => (response = res));
+    return response;
   };
 
   static newsArticle = async () => {
@@ -37,8 +39,6 @@ export default class Auth {
           response = res.articles;
         });
       return response;
-    } catch (error) {
-      console.log("errror>>>");
-    }
+    } catch (error) {}
   };
 }

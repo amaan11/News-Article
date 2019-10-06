@@ -42,7 +42,6 @@ class ArticleList extends React.Component {
     const articles = get(this.props, "articles", []);
     const defaultImage = articles.length > 0 && articles[0].urlToImage; //Will be used if there is no image for that article
 
-    console.log("articles>>", articles);
     return (
       <div className="d-flex flex-wrap ">
         {articles.length > 0 ? (
