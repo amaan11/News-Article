@@ -42,6 +42,7 @@ class ArticleList extends React.Component {
     const articles = get(this.props, "articles", []);
     const defaultImage = articles.length > 0 && articles[0].urlToImage; //Will be used if there is no image for that article
 
+    const { isFilter } = this.props;
     return (
       <div className="d-flex flex-wrap ">
         {articles.length > 0 ? (
@@ -61,8 +62,10 @@ class ArticleList extends React.Component {
               </div>
             );
           })
-        ) : (
+        ) : isFilter ? (
           <h1 className="text-center">NO RESULTS FOUND!!!</h1>
+        ) : (
+          ""
         )}
       </div>
     );

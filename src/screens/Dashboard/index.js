@@ -215,7 +215,7 @@ class Dashboard extends React.Component {
             </div>
           )}
           <div>
-            <ArticleList articles={articles} />
+            <ArticleList articles={articles} isFilter={isFiltered} />
           </div>
         </div>
       </div>
