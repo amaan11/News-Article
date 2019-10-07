@@ -125,8 +125,8 @@ class Dashboard extends React.Component {
           authors.push({ label: author, value: author });
         }
       });
-      return { sites, authors };
     }
+    return { sites, authors };
   };
   onFilterArticleHandler = (value, type) => {
     const articles = get(this.props, "articles", []);
